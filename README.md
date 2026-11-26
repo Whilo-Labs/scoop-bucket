@@ -1,42 +1,42 @@
-# Scoop Bucket Template
+# Whilo Labs Scoop bucket
 
-<!-- Uncomment the following line after replacing placeholders -->
-<!-- [![Tests](https://github.com/<username>/<bucketname>/actions/workflows/ci.yml/badge.svg)](https://github.com/<username>/<bucketname>/actions/workflows/ci.yml) [![Excavator](https://github.com/<username>/<bucketname>/actions/workflows/excavator.yml/badge.svg)](https://github.com/<username>/<bucketname>/actions/workflows/excavator.yml) -->
+[![Excavator](https://github.com/Whilo-Labs/scoop-bucket/actions/workflows/excavator.yml/badge.svg)](https://github.com/Whilo-Labs/scoop-bucket/actions/workflows/excavator.yml)
 
-Template bucket for [Scoop](https://scoop.sh), the Windows command-line installer.
+A [Scoop](https://scoop.sh) bucket for the open-source apps of Whilo Labs.
 
-## How do I use this template?
-
-1. Generate your own copy of this repository with the "Use this template"
-   button.
-2. Allow all GitHub Actions:
-   - Navigate to `Settings` - `Actions` - `General` - `Actions permissions`.
-   - Select `Allow all actions and reusable workflows`.
-   - Then `Save`.
-3. Workflow permissions:
-   - Navigate to `Settings` - `Actions` - `General` - `Workflow permissions`.
-   - Ensure `Read repository contents and packages permissions` is selected.
-   - Then `Save`.
-4. Document the bucket in `README.md`.
-5. Replace the placeholder repository string in `bin/auto-pr.ps1`.
-6. Create new manifests by copying `bucket/app-name.json.template` to
-   `bucket/<app-name>.json`.
-7. Commit and push changes.
-8. If you'd like your bucket to be indexed on `https://scoop.sh`, add the
-   topic `scoop-bucket` to your repository.
-
-## How do I install these manifests?
-
-After manifests have been committed and pushed, run the following:
+## Install
 
 ```pwsh
-scoop bucket add <bucketname> https://github.com/<username>/<bucketname>
-scoop install <bucketname>/<manifestname>
+scoop bucket add whilo-labs https://github.com/Whilo-Labs/scoop-bucket
+scoop install whilo-labs/whilo-trace
 ```
 
-## How do I contribute new manifests?
+## Apps
 
-To make a new manifest contribution, please read the [Contributing
-Guide](https://github.com/ScoopInstaller/.github/blob/main/.github/CONTRIBUTING.md)
-and [App Manifests](https://github.com/ScoopInstaller/Scoop/wiki/App-Manifests)
-wiki page.
+| App | What it is | What you get |
+|---|---|---|
+| [whilo-trace](https://github.com/Whilo-Labs/whilo-trace) | Network path monitor: per-hop packet loss and latency for several hosts at once | The desktop app in the Start menu as "Whilo Trace" and the command line as `whilo-trace-cli` |
+
+The manifest installs the portable zip from the [Whilo Trace releases](https://github.com/Whilo-Labs/whilo-trace/releases) (Windows x64).
+
+## Update and uninstall
+
+```pwsh
+scoop update
+scoop update whilo-trace
+scoop uninstall whilo-trace
+```
+
+Whilo Trace keeps its history in `%LOCALAPPDATA%\Whilo Trace`, one file shared by the app and the command line. That folder is not in the Scoop folder, so `scoop uninstall` leaves it in place.
+
+## How the manifest is updated
+
+A scheduled workflow, [Excavator](.github/workflows/excavator.yml), checks for a new Whilo Trace release every 4 hours and updates the manifest.
+
+## Problems
+
+A problem with the app itself: [Whilo Trace issues](https://github.com/Whilo-Labs/whilo-trace/issues). A problem with installing or updating it through Scoop: the issues of this repository.
+
+## License
+
+The manifests in this repository are released under [the Unlicense](LICENSE). Each app keeps its own license.

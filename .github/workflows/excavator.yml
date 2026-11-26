@@ -1,9 +1,15 @@
+# Keeps the manifests in bucket/ up to date: Scoop's checkver looks for a new release, autoupdate
+# rewrites the manifest (version, url, hash) and the change is pushed to the default branch.
+# For a GitHub release file the hash comes from the SHA-256 digest that GitHub lists for it.
+# Adapted from https://github.com/ScoopInstaller/BucketTemplate/blob/master/.github/workflows/excavator.yml
+# (actions pinned as in the template, 2026-08-24). Run it by hand from the Actions tab right after
+# a release to skip the wait.
 name: Excavator
 
 on:
   workflow_dispatch:
   schedule:
-    # run every 4 hours
+    # every 4 hours
     - cron: '20 */4 * * *'
 
 permissions:
@@ -13,6 +19,7 @@ jobs:
   excavate:
     name: Excavate
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

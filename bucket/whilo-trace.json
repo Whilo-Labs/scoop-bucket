@@ -1,0 +1,30 @@
+{
+    "version": "0.2.1",
+    "description": "Network path monitor: per-hop packet loss and latency for several hosts at once, similar to mtr, WinMTR and PingPlotter.",
+    "homepage": "https://github.com/Whilo-Labs/whilo-trace",
+    "license": "MIT|Apache-2.0",
+    "suggest": {
+        "vcredist": "extras/vcredist2022"
+    },
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/Whilo-Labs/whilo-trace/releases/download/v0.2.1/whilo-trace-0.2.1-windows-x64-portable.zip",
+            "hash": "52dad198ba420d55717d548a7c1f53f3a7a909dd6024a7af5e68305071e3714f"
+        }
+    },
+    "bin": "whilo-trace-cli.exe",
+    "shortcuts": [
+        [
+            "whilo-trace.exe",
+            "Whilo Trace"
+        ]
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/Whilo-Labs/whilo-trace/releases/download/v$version/whilo-trace-$version-windows-x64-portable.zip"
+            }
+        }
+    }
+}
